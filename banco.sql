@@ -3,17 +3,16 @@ USE defaultdb;
 CREATE TABLE IF NOT EXISTS alimentos (
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
-    descricao TEXT,
     categoria VARCHAR(100),
     calorias DECIMAL(10, 2),
     proteinas DECIMAL(10, 2),
     carboidratos DECIMAL(10, 2),
     gorduras DECIMAL(10, 2),
-    unidade_medida VARCHAR(50),
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    peso VARCHAR(50),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    imagem VARCHAR(300)
 );
 
-INSERT INTO perfumes VALUES (100,'Malbec Ultra Bleu','oBoticário','Amadeirado', '100 ml', 209.90,'https://fraguru.com/mdimg/perfume/375x500.75487.jpg');
 
 
 USE defaultdb;

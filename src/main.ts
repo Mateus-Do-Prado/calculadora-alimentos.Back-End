@@ -136,14 +136,14 @@ app.put("/clientes/:id", async (req,res) =>{
 
 
 
-/// Parte de Configuração dos Perfumes feito por Marcos Antonio e Felipe Brito:
+/// Parte de Configuração dos Alimentos:
  
-// Parte do Marcos - Listagem, Inserindo, alterando e removendo perfumes :
-//Listando os perdumes:
-app.get("/perfumes", async (req, res) => {
+// Parte de Listagem, Inserindo, alterando e removendo alimentos:
+//Listando os alimentos:
+app.get("/alimentos", async (req, res) => {
     try{
         const banco = new BancoMysql();
-        const result = await banco.listarPerfumes()
+        const result = await banco.listarAlimentos()
         console.log(result)
         await banco.end()
         res.send(result)
@@ -154,10 +154,10 @@ app.get("/perfumes", async (req, res) => {
 })
 
 
-app.get("/perfumes/:id", async(req,res)=>{
+app.get("/alimentos/:id", async(req,res)=>{
     try{
         const banco = new BancoMysql();
-        const result = await banco.listarPerfumesPorId(req.params.id)
+        const result = await banco.listarAlimentosPorId(req.params.id)
         console.log(result)
         await banco.end()
         res.send(result)
@@ -168,18 +168,18 @@ app.get("/perfumes/:id", async(req,res)=>{
 })
 
 
-//Inserindo perfume:
-// Parte para inserir um perfume no Back-end:
-app.post("/perfumes", async (req, res) => {
+//Inserindo Alimento:
+// Parte para inserir um Alimento no Back-end:
+app.post("/alimentos", async (req, res) => {
    
    
     try{
-        const {id,nome,marca,fragrancia,volume,preco,imagem} = req.body
+        const {id,nome,categoria,calorias,proteinas,carboidratos,gorduras,peso,data_cadastro,imagem} = req.body
         
         const banco = new BancoMysql();
         
-        const perfume = {id:parseInt(id),nome,marca,fragrancia,volume,preco,imagem}
-        const result = await banco.inserirPerfumes(perfume)
+        const alimento = {id:parseInt(id),nome,categoria,calorias,proteinas,carboidratos,gorduras,peso,data_cadastro,imagem}
+        const result = await banco.inserirAlimentos(alimento)
         console.log(result)
         
         await banco.end()
@@ -193,15 +193,15 @@ app.post("/perfumes", async (req, res) => {
    
 
 });
-// Parte do Felipe - Deletando os perfumes e Alterando eles:
-app.delete("/perfumes/:id",async (req,res) =>{
+// Parte Deletando os alimentos e Alterando eles:
+app.delete("/alimentos/:id",async (req,res) =>{
     try{
         const banco = new BancoMysql();
 
-        const sqlQuery = "DELETE FROM clientes WHERE id = ?"
+        const sqlQuery = "DELETE FROM alimentos WHERE id = ?"
         const parametro = [req.params.id]
 
-        const result = await banco.excluirPerfumes(req.params.id)
+        const result = await banco.excluirAlimentos(req.params.id)
         
 
         res.status(200).send(result)
@@ -210,20 +210,20 @@ app.delete("/perfumes/:id",async (req,res) =>{
         res.status(500).send("Erro do servidor")
     }  
 
-    console.log("Tentando excluir o perfume de id:", req.params.id)
+    console.log("Tentando excluir o alimento de id:", req.params.id)
     
 })
 
 
-app.put("/perfumes/:id", async (req,res) =>{
+app.put("/alimentos/:id", async (req,res) =>{
     try{
-        const {nome,marca,fragrancia,volume,preco,imagem} = req.body
+        const {nome,categoria,calorias,proteinas,carboidratos,gorduras,peso,data_cadastro,imagem} = req.body
         const banco = new BancoMysql();
 
         //const sqlQuery = "UPDATE produtos SET nome = ?, marca = ?, fragrancia = ?, volume = ?, preco = ?, imagem = ? WHERE id = ?"
-        const perfume = {nome, marca, fragrancia, volume, preco, imagem}
+        const alimento = {nome,categoria,calorias,proteinas,carboidratos,gorduras,peso,data_cadastro,imagem}
 
-        const result = await banco.alterarPerfumes(req.params.id, perfume)
+        const result = await banco.alterarAlimentos(req.params.id, alimento)
         res.status(200).send(result)
 
 
@@ -231,7 +231,7 @@ app.put("/perfumes/:id", async (req,res) =>{
         console.log(e)
         res.status(500).send("Erro do servidor")
     }  
-    console.log("Tentando alterar o perfume de id:",  req.params.id)
+    console.log("Tentando alterar o alimento de id:",  req.params.id)
    
 })
 

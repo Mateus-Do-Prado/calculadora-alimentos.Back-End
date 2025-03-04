@@ -10,7 +10,7 @@ class BancoMysql {
             host: process.env.dbhost ? process.env.dbhost : "localhost",
             user: process.env.dbuser ? process.env.dbuser : "root",
             password: process.env.dbpassword ? process.env.dbpassword : "",
-            database: process.env.dbname ? process.env.dbname : "banco1022b",
+            database: process.env.dbname ? process.env.dbname : "bancoca",
             port: process.env.dbport ? parseInt(process.env.dbport) : 3306
         });
     }
@@ -25,38 +25,39 @@ class BancoMysql {
         await conn.end();
     }
 
-    async listarPerfumes(){
+    async listarAlimentos(){
         const conn = await this.getConnection()
-        const [result, fields] = await conn.query("SELECT * from perfumes");
+        const [result, fields] = await conn.query("SELECT * from alimentos");
         return result
     }
-    async listarPerfumesPorId(id:string){
+    async listarAlimentosPorId(id:string){
         const conn = await this.getConnection()
-        const sqlQuery = "SELECT * FROM perfumes WHERE id = ?"
+        const sqlQuery = "SELECT * FROM alimentos WHERE id = ?"
         const parametro = [id]
         const [result, fields] = await conn.query(sqlQuery,parametro) as RowDataPacket[];
         //Return the first element of the array
         return result[0]
     }
 
-    async inserirPerfumes(perfume:{id:number,nome:string,marca:string,fragrancia:string,volume:string,preco:string,imagem:string}){
+    async inserirAlimentos(alimento:{id:number,nome:string,categoria:string,calorias:string,proteinas:string,carboidratos:string,gorduras:string,peso:string,data_cadastro:string,imagem:string}){
+
         const conn = await this.getConnection()
-        const sqlQuery = "INSERT INTO perfumes (id,nome,marca,fragrancia,volume,preco,imagem) VALUES (?,?,?,?,?,?,?)"
-        const parametro = [perfume.id,perfume.nome,perfume.marca,perfume.fragrancia,perfume.volume,perfume.preco,perfume.imagem]
+        const sqlQuery = "INSERT INTO alimentos (id,nome,categoria,calorias,proteinas,carboidratos,gorduras,peso,data_cadastro,imagem) VALUES (?,?,?,?,?,?,?,?,?,?)"
+        const parametro = [alimento.id,alimento.nome,alimento.categoria,alimento.calorias,alimento.proteinas,alimento.carboidratos,alimento.gorduras,alimento.peso,alimento.data_cadastro,alimento.imagem]
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
     }
-    async excluirPerfumes(id:string){
+    async excluirAlimentos(id:string){
         const conn = await this.getConnection()
-        const sqlQuery = "DELETE FROM perfumes WHERE id = ?"
+        const sqlQuery = "DELETE FROM alimentos WHERE id = ?"
         const parametro = [id]
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
     }
-    async alterarPerfumes(id:string,perfume:{id?:string,nome:string,marca:string,fragrancia:string,volume:string,preco:string,imagem:string}){
+    async alterarAlimentos(id:string,alimento:{id?:string,nome:string,categoria:string,calorias:string,proteinas:string,carboidratos:string,gorduras:string,peso:string,data_cadastro:string,imagem:string}){
         const conn = await this.getConnection()
-        const sqlQuery = "UPDATE perfumes SET nome=?,marca=?,fragrancia=?,volume=?,preco=?,imagem=? WHERE id = ?"
-        const parametro = [perfume.nome,perfume.marca,perfume.fragrancia,perfume.volume,perfume.preco,perfume.imagem,id]
+        const sqlQuery = "UPDATE alimentos SET nome=?,categoria=?,calorias=?,proteinas=?,carboidratos=?,gorduras=?,peso=?,data_cadastro=?,imagem=? WHERE id = ?"
+        const parametro = [alimento.nome,alimento.categoria,alimento.calorias,alimento.proteinas,alimento.carboidratos,alimento.gorduras,alimento.peso,alimento.data_cadastro,alimento.imagem,id]
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
     }
@@ -64,6 +65,9 @@ class BancoMysql {
 
 
 
+
+
+    
     //Parte dos Clientes
     async listarClientes(){
         const conn = await this.getConnection()
