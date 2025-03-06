@@ -66,7 +66,7 @@ class BancoMysql {
 
 
 
-
+/*
     
     //Parte dos Clientes
     async listarClientes(){
@@ -106,7 +106,7 @@ class BancoMysql {
         const parametro = [cliente.nome,cliente.sobrenome,cliente.idade,cliente.email,id]
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
-    }
+    }*/
 }
 
 export default BancoMysql;
