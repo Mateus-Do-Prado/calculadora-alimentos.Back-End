@@ -26,8 +26,11 @@ import BancoMysql from './db/bancoMysql'
 
  /// Parte de Configuração dos Clientes feito por Mateus do Prado:
  
-// Parte do Mateus - Listagem dos clientes e Inserindo eles:
+// Parte de Listagem dos clientes e Inserindo eles:
 //Listando os clientes:
+
+
+/*
 app.get("/clientes", async (req, res) => {
     try{
         const banco = new BancoMysql();
@@ -122,7 +125,7 @@ app.put("/clientes/:id", async (req,res) =>{
     console.log("Tentando alterar o cliente de id:",  req.params.id)
    
 })
-
+*/
 
 
 

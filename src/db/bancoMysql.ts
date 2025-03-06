@@ -9,7 +9,7 @@ class BancoMysql {
         this.conexao = mysql.createConnection({
             host: process.env.dbhost ? process.env.dbhost : "localhost",
             user: process.env.dbuser ? process.env.dbuser : "root",
-            password: process.env.dbpassword ? process.env.dbpassword : "",
+            password: process.env.dbpassword ? process.env.dbpassword : "corinthians",
             database: process.env.dbname ? process.env.dbname : "bancoca",
             port: process.env.dbport ? parseInt(process.env.dbport) : 3306
         });
