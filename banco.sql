@@ -15,16 +15,16 @@ CREATE TABLE IF NOT EXISTS alimentos (
 
 
 
-USE defaultdb;
+use defaultdb;
 CREATE TABLE IF NOT EXISTS clientes(
 id BIGINT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50),
 	sobrenome VARCHAR(75),
     idade decimal(3),
-    email VARCHAR(100)
+    email VARCHAR(100),
+    senha VARCHAR(50),
+    classe VARCHAR(50)
 );
-
-UPDATE `defaultdb`.`clientes` SET `sobrenome` = 'Do Prado Alcântara' WHERE (`id` = '1');
 
 
 
