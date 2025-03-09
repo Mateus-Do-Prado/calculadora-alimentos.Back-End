@@ -30,7 +30,7 @@ import BancoMysql from './db/bancoMysql'
 //Listando os clientes:
 
 
-/*
+
 app.get("/clientes", async (req, res) => {
     try{
         const banco = new BancoMysql();
@@ -65,11 +65,11 @@ app.post("/clientes", async (req, res) => {
    
    
     try{
-        const {id,nome,sobrenome,idade,email} = req.body
+        const {id,nome,sobrenome,idade,email,senha,classe} = req.body
         
         const banco = new BancoMysql();
         
-        const cliente = {id:parseInt(id),nome,sobrenome,idade,email}
+        const cliente = {id:parseInt(id),nome,sobrenome,idade,email,senha,classe}
         const result = await banco.inserirClientes(cliente)
         console.log(result)
         
@@ -108,11 +108,11 @@ app.delete("/clientes/:id",async (req,res) =>{
 
 app.put("/clientes/:id", async (req,res) =>{
     try{
-        const {nome,sobrenome,idade,email} = req.body
+        const {nome,sobrenome,idade,email,senha} = req.body
         const banco = new BancoMysql();
 
         //const sqlQuery = "UPDATE produtos SET nome = ?, descricao = ?, preco = ?, imagem = ? WHERE id = ?"
-        const cliente = {nome, sobrenome, idade, email}
+        const cliente = {nome, sobrenome, idade, email, senha}
 
         const result = await banco.alterarClientes(req.params.id, cliente)
         res.status(200).send(result)
@@ -125,7 +125,7 @@ app.put("/clientes/:id", async (req,res) =>{
     console.log("Tentando alterar o cliente de id:",  req.params.id)
    
 })
-*/
+
 
 
 

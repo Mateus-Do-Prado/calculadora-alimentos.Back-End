@@ -66,7 +66,7 @@ class BancoMysql {
 
 
 
-/*
+
     
     //Parte dos Clientes
     async listarClientes(){
@@ -86,10 +86,10 @@ class BancoMysql {
 
 
 
-    async inserirClientes(cliente:{id:number,nome:string,sobrenome:string,idade:string,email:string}){
+    async inserirClientes(cliente:{id:number,nome:string,sobrenome:string,idade:string,email:string,senha:string,classe:string}){
         const conn = await this.getConnection()
-        const sqlQuery = "INSERT INTO clientes (id,nome,sobrenome,idade,email) VALUES (?,?,?,?,?)"
-        const parametro = [cliente.id,cliente.nome,cliente.sobrenome,cliente.idade,cliente.email]
+        const sqlQuery = "INSERT INTO clientes (id,nome,sobrenome,idade,email,senha,classe) VALUES (?,?,?,?,?,?,?)"
+        const parametro = [cliente.id,cliente.nome,cliente.sobrenome,cliente.idade,cliente.email,cliente.senha,cliente.classe]
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
     }
@@ -100,13 +100,13 @@ class BancoMysql {
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
     }
-    async alterarClientes(id:string,cliente:{id?:string,nome:string,sobrenome:string,idade:string,email:string}){
+    async alterarClientes(id:string,cliente:{id?:string,nome:string,sobrenome:string,idade:string,email:string,senha:string}){
         const conn = await this.getConnection()
-        const sqlQuery = "UPDATE clientes SET nome=?,sobrenome=?,idade=?,email=? WHERE id = ?"
-        const parametro = [cliente.nome,cliente.sobrenome,cliente.idade,cliente.email,id]
+        const sqlQuery = "UPDATE clientes SET nome=?,sobrenome=?,idade=?,email=?,senha=? WHERE id = ?"
+        const parametro = [cliente.nome,cliente.sobrenome,cliente.idade,cliente.email,cliente.senha,id]
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
-    }*/
+    }
 }
 
 export default BancoMysql;
