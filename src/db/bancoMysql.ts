@@ -1,4 +1,8 @@
 import mysql, { Connection, RowDataPacket } from 'mysql2/promise';
+import bcrypt from 'bcrypt';
+var { expressjwt: jwt } = require("express-jwt");
+
+
 
 class BancoMysql {
     // Propriedade
@@ -85,6 +89,34 @@ class BancoMysql {
     }
 
 
+    async loginCliente(email: string, senha: string) {
+        const conn = await this.getConnection();
+    
+        // Consulta para buscar o cliente pelo email
+        const sqlQuery = "SELECT * FROM clientes WHERE email = ?";
+        const parametro = [email];
+        const [rows] = await conn.query(sqlQuery, parametro) as RowDataPacket[];
+    
+        // Verifica se o cliente foi encontrado
+        if (rows.length === 0) {
+            throw new Error('Cliente não encontrado');
+        }
+    
+        const cliente = rows[0];
+    
+        // Compara a senha fornecida com a senha armazenada
+        const senhaValida = await bcrypt.compare(senha, cliente.senha);
+        if (!senhaValida) {
+            throw new Error('Senha inválida');
+        }
+    
+        // Gera um token JWT
+        const token = jwt.sign({ id: cliente.id }, 'seu-segredo', { expiresIn: '1h' });
+    
+        return { token, cliente }; // Retorna o token e os dados do usuário, se necessário
+    }
+
+
 
     async inserirClientes(cliente:{id:number,nome:string,sobrenome:string,idade:string,email:string,senha:string,classe:string}){
         const conn = await this.getConnection()
@@ -93,6 +125,11 @@ class BancoMysql {
         const [result, fields] = await conn.query(sqlQuery,parametro);
         return result
     }
+
+
+
+
+
     async excluirClientes(id:string){
         const conn = await this.getConnection()
         const sqlQuery = "DELETE FROM clientes WHERE id = ?"

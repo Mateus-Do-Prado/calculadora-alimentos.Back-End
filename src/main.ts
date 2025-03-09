@@ -3,7 +3,7 @@ console.log(" Olá Mundo")
 //
 /*1 - Para construir um servidor back-end e responder 
 Vamos utilizar o EXPRESS */
-import express from 'express'
+import express, { Request, Response } from 'express';
 import cors from 'cors'
 import mysql from 'mysql2/promise'
 //Criar o Objeto do tipo express 
@@ -84,6 +84,24 @@ app.post("/clientes", async (req, res) => {
    
 
 });
+
+
+//Login do cliente:
+app.post('/login', async (req: Request, res: Response) => {
+    const { email, senha } = req.body;
+
+    try {
+        const banco = new BancoMysql();
+        const { token, cliente } = await banco.loginCliente(email, senha);
+        return res.json({ token, cliente });
+    } catch(e){
+        console.log(e)
+        res.status(500).send("Erro do servidor")
+    }  
+});
+
+
+
 
 app.delete("/clientes/:id",async (req,res) =>{
     try{
