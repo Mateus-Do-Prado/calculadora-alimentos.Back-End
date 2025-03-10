@@ -87,7 +87,8 @@ app.post("/clientes", async (req, res) => {
 
 
 //Login do cliente:
-app.post('/login', async (req: Request, res: Response) => {
+/*
+app.post('/clientes', async (req: Request, res: Response) => {
     const { email, senha } = req.body;
 
     try {
@@ -99,7 +100,7 @@ app.post('/login', async (req: Request, res: Response) => {
         res.status(500).send("Erro do servidor")
     }  
 });
-
+*/
 
 
 

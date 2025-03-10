@@ -88,7 +88,9 @@ class BancoMysql {
         return result[0]
     }
 
+    
 
+/*
     async loginCliente(email: string, senha: string) {
         const conn = await this.getConnection();
     
@@ -99,7 +101,7 @@ class BancoMysql {
     
         // Verifica se o cliente foi encontrado
         if (rows.length === 0) {
-            throw new Error('Cliente não encontrado');
+            throw new Error('Cliente não encontrado...');
         }
     
         const cliente = rows[0];
@@ -115,7 +117,7 @@ class BancoMysql {
     
         return { token, cliente }; // Retorna o token e os dados do usuário, se necessário
     }
-
+*/
 
 
     async inserirClientes(cliente:{id:number,nome:string,sobrenome:string,idade:string,email:string,senha:string,classe:string}){
